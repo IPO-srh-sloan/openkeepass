@@ -79,6 +79,7 @@ public class KeePassDatabase {
 	private KeePassDatabase(InputStream inputStream) {
 		try {
 			keepassFile = StreamUtils.toByteArray(inputStream);
+			inputStream.close(); //without this the java process keeps a lock on the DB file as long as it runs
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
